@@ -39,9 +39,9 @@ if 'word_clouds' not in st.session_state:
 
 # Define the three questions
 QUESTIONS = [
-    "What words come to mind when you think about artificial intelligence?",
-    "What do you believe are the biggest challenges facing our society today?",
-    "What skills do you think will be most important in the future workplace?"
+    "What one word would you use to describe our team's journey during the last PI?",
+    "What's one small habit or practice that helped you stay productive during the last PI?",
+    "If you could have a superpower to improve our next PI, what would it be?"
 ]
 
 # Common English stop words
