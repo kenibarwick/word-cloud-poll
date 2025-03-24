@@ -7,6 +7,14 @@ import json
 from io import BytesIO
 import base64
 
+# Instead of this:
+# ADMIN_PASSWORD = "admin123"  # Hardcoded password
+
+# Use this:
+# Get the admin password from secrets
+# If not found, use a default (but this should only be for development)
+ADMIN_PASSWORD = st.secrets.get("admin_password", "admin123")
+
 # Set page configuration
 st.set_page_config(
     page_title="Word Cloud Poll",
@@ -28,8 +36,6 @@ if 'config' not in st.session_state:
 if 'word_clouds' not in st.session_state:
     st.session_state.word_clouds = [[], [], []]  # Empty lists for each question
 
-# Admin password - store this securely in production!
-ADMIN_PASSWORD = "admin123"  # Change this to a secure password
 
 # Define the three questions
 QUESTIONS = [
@@ -116,6 +122,12 @@ def admin_section():
     """Admin section for controlling the questions"""
     st.sidebar.markdown("---")
     st.sidebar.subheader("Admin Controls")
+    
+    # Get admin password from secrets
+    # In production, this will be set in Streamlit Cloud
+    # For local development, it will use the value from .streamlit/secrets.toml
+    # If neither is available, it falls back to a default (which you should change)
+    ADMIN_PASSWORD = st.secrets.get("admin_password", "admin123")
     
     # Password protection
     if not st.session_state.admin_authenticated:
